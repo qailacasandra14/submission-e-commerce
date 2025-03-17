@@ -41,7 +41,7 @@ with col3:
     st.metric("Total Produk Terjual", int(filtered_df["order_item_id"].count()))
 with col4:
     avg_score = filtered_df["review_score"].mean()
-    st.metric("Rata-rata Skor Review", f"{avg_score:.2f} ⭐")
+    st.metric("Rata-rata Skor Review", f"{avg_score:.2f}")
 
 # Grafik: Jumlah Order per Kota
 st.subheader("Jumlah Order per Kota")
