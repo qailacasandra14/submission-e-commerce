@@ -2,15 +2,11 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# -----------------------------
 # Setup Dashboard
-# -----------------------------
 st.set_page_config(page_title="Dashboard E-Commerce", layout="wide")
-st.title("📊 Dashboard E-Commerce - Penjualan dan Review")
+st.title("Penjualan dan Review")
 
-# -----------------------------
 # Load Data
-# -----------------------------
 @st.cache_data
 def load_data():
     df = pd.read_csv("merged_all_data.csv", parse_dates=["order_purchase_timestamp"])
@@ -19,9 +15,7 @@ def load_data():
 
 df = load_data()
 
-# -----------------------------
 # Sidebar Filters
-# -----------------------------
 st.sidebar.header("Filter Data")
 
 all_cities = df["customer_city"].dropna().unique()
@@ -35,9 +29,7 @@ filtered_df = df[
     (df["product_category_name_english"].isin(selected_categories))
 ]
 
-# -----------------------------
 # Ringkasan Data
-# -----------------------------
 st.subheader("Ringkasan Data")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -51,9 +43,7 @@ with col4:
     avg_score = filtered_df["review_score"].mean()
     st.metric("Rata-rata Skor Review", f"{avg_score:.2f} ⭐")
 
-# -----------------------------
 # Grafik: Jumlah Order per Kota
-# -----------------------------
 st.subheader("Jumlah Order per Kota")
 order_per_city = filtered_df.groupby("customer_city")["order_id"].nunique().sort_values(ascending=False)
 
@@ -63,9 +53,7 @@ plt.title("Top 10 Kota dengan Jumlah Order Terbanyak")
 plt.ylabel("Jumlah Order")
 st.pyplot(fig1)
 
-# -----------------------------
 # Grafik: Pendapatan per Kategori
-# -----------------------------
 st.subheader("Pendapatan per Kategori Produk")
 revenue_per_cat = filtered_df.groupby("product_category_name_english")["total_price"].sum().sort_values(ascending=False)
 
@@ -75,9 +63,7 @@ plt.title("Top 10 Kategori Produk dengan Pendapatan Tertinggi")
 plt.xlabel("Total Pendapatan")
 st.pyplot(fig2)
 
-# -----------------------------
 # Grafik: Rata-rata Skor Review per Kategori
-# -----------------------------
 st.subheader("Review per Kategori Produk")
 avg_review_per_cat = filtered_df.groupby("product_category_name_english")["review_score"].mean().sort_values(ascending=False)
 
