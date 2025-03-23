@@ -1,3 +1,3 @@
-# submission-e-commerce
+# E-Commerce Dashboard
 
 ## setup environement
