@@ -8,4 +8,4 @@ venv\Scripts\activate
 pip install -r requirements.txt
 
 ## run streamlit
-streamlit run
+streamlit run dashboard streamlit.py
