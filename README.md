@@ -7,4 +7,5 @@ venv\Scripts\activate
 ## install library
 pip install -r requirements.txt
 
-## 
+## run streamlit
+streamlit run
