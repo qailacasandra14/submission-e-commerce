@@ -96,3 +96,7 @@ avg_review_per_cat.head(10).plot(kind="bar", ax=ax3, color='green')
 plt.title("Top 10 Kategori Produk dengan Review Tertinggi")
 plt.ylabel("Skor Review Rata-rata")
 st.pyplot(fig3)
+
+import pandas as pd
+url = "https://raw.githubusercontent.com/qailacasandra14/submission-e-commerce/Merged_all_data.zip"
+data = pd.read_zip(https://raw.githubusercontent.com/qailacasandra14/submission-e-commerce/Merged_all_data.zip) 
