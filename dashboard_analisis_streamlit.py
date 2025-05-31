@@ -97,6 +97,35 @@ plt.title("Top 10 Kategori Produk dengan Review Tertinggi")
 plt.ylabel("Skor Review Rata-rata")
 st.pyplot(fig3)
 
+import streamlit as st
 import pandas as pd
-url = "https://raw.githubusercontent.com/qailacasandra14/submission-e-commerce/Merged_all_data.zip"
-data = pd.read_zip(https://raw.githubusercontent.com/qailacasandra14/submission-e-commerce/Merged_all_data.zip) 
+import requests
+from zipfile import ZipFile
+from io import BytesIO
+
+# URL file ZIP (pastikan format RAW GitHub)
+url = "https://raw.githubusercontent.com/qailacasandra14/submission-e-commerce/main/Merged_all_data.zip"
+
+try:
+    # Unduh file ZIP
+    response = requests.get(url)
+    zip_file = ZipFile(BytesIO(response.content))
+
+    # Cek daftar file dalam ZIP
+    file_list = zip_file.namelist()
+    st.write("File dalam ZIP:", file_list)  # Tampilkan daftar file
+
+    # Baca file pertama (contoh: CSV)
+    with zip_file.open(file_list[0]) as file:
+        if file_list[0].endswith('.csv'):
+            data = pd.read_csv(file)
+        elif file_list[0].endswith('.xlsx'):
+            data = pd.read_excel(file)
+        else:
+            st.error("Format file tidak didukung!")
+
+    # Tampilkan data
+    st.dataframe(data)
+
+except Exception as e:
+    st.error(f"Terjadi error: {e}")
